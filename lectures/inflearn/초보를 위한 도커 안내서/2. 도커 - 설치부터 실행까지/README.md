@@ -122,3 +122,45 @@
 
 ## 도커 컴포즈
 
+도커 컴포즈를 이용하면 복수의 컨테이너를 구성하여 관리할 수 있다.
+
+docker-compose 명령어 : (대부분 docker 명령어와 비슷.)
+- up <br>
+  docker-compose.yml 파일을 실행시킨다. <br>
+  해당 파일을 실행하면 파일 내부에 구성된 컨테이너들이 실행된다.
+- start <br>
+  docker-composem 컨테이너를 실행시킨다.
+- restart <br>
+  컨테이너 재시작.
+- stop <br>
+  컨테이너 멈춤.
+- down <br>
+  컨테이너 종류 후 삭제.
+- logs <br>
+  컨테이너 로그 출력.
+- ps <br>
+  컨테이너 목록 출력.
+- exec <br>
+  실행 중인 컨테이너에 명령어 실행.
+- build <br>
+  컨테이너 build 부분에 정의된 내용대로 빌드.
+
+docker-compose.yml 구성
+
+```yml
+version: '3'    # docker-compose.yml의 버전을 명시.
+                # 이 버전에 따라 지원하는 도커 엔진도 다름.
+services:       # 여러 서비스들이 포함된다.
+  ghost:        # 이 부분에 서비스 이름을 명시한다. (docker run 명령어 옵션 중 --name과 같다.)
+    image: ghost:4-alpine # 컨테이너에 사용할 이미지의 이름. 생략하면 자동으로 latest가 된다.
+    restart: always # 재시작 정책. "no", always, on-failure, unless-stopped
+    ports:      # 호스트와 컨테이너를 연결할 포트들, {호스트포트}:{컨테이너 포트}
+      - 8080:2368
+      - ..
+    environment:  # 컨테이너에서 사용할 환경변수들
+      - database__client: mysql
+    volumes:      # 마운트 하려는 디렉터리들, {호스트 디렉터리}:{컨테이너 디렉터리}
+  ..
+    ..
+
+```
