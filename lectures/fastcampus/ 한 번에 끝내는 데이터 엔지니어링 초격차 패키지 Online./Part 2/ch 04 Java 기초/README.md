@@ -29,24 +29,75 @@ ch 05 Java 기초
   - Bytecode verifier가 byte code를 검사.
   - JIT Compiler는 class에서 기계어로 바꾸는건 실시간으로 실행.?
 
-# 객체지향 프로그래밍 - 추상클래스
-
-# 객체지향 프로그래밍 - 인터페이스
-
-# 객체지향 프로그래밍 - 객체지향 퀴즈
-
 # 예외, 예외처리 - 예외처리의 목적 & try-catch-finally
+- 예외 처리의 목적 <br>
+  - 비정상 종료를 막기 위해서
+  - 개발자에세 알려서 코드를 보완할 수 있도록 하기 위해
+- 자바 예외 클래스 위계구조 <br>
+  - 모든 예외 클래스는 Throwable의 자손 클래스.
+  - Thrhowable을 상속받는 종류는 크게 Error와 Exception이 있다.
+  - Error의 경우 프로그램이 강제 종료되어야 하는 경우.
+  - Exception의 경우 프로그램을 종료하지 않고, 예외를 다루기 위해서 사용.
 
 # 예외, 예외처리 - try-with-resource & 예외, 에러처리 퀴즈
+- try-with_resource <br>
+  - try 옆에 리소스를 이니셜라이징 하는 코드를 넣으면 자동으로 자원을 해제.
+  - 만약 finally에서 해제가 안되면 자원을 계속 잡고있기 때문에 나중에 다시 해당 자원을 사용할 때 문제가 생길 수 있음.
+  - AutoClosable을 구현한 객체만 try-with-resouce를 사용할 수 있다. (java doc에 해당 내용이 있음.)
+- 메소드에서의 예외 선언 <br>
+  - throws를 이용해서 사용.
 
 # 날짜와 시간 다루기
+- Date 클래스 <br>
+  - 전통적으로 시간을 표현하는 클래스.
+  - unix epoch time의 milliseconds 단위로 시간을 표현.
+  - Epoch Time이란? 1970년 1월 1일 부터 얼마나 지났는지 초, 밀리초, 나노초 단위로 센 카운트 값. 프로그래밍 하면서 어떤 시점을 지역과 상관없이 숫자로 표현하고 싶을 때 사용.
+  - Date 클래스의 단점 :
+    - Thread safe 하지 않다. 여러 Thread에서 사용하려면 한번에 한 쓰레드 사용이 안됨.
+    - API가 이해하거나 사용하기 쉽지 않음.
+    - Timezone을 적용하기 어렵다.
+- LocalDate, LocalTime, LocalDateTime <br>
+  - 시간 없이 연,월,일 날짜만 다루기 위한 클래스.
+- 기간 (Period, Duration)
+  - 시간이나 날짜 사이의 기간을 type-safe하게 표현.
+  - period : 두 날짜 사이의 기간, Duration : 두 시간 사이의 기간.
+- Date, Calendar의 호환 <br>
+  - Instanct 클래스를 통해서 LocalDate, LocalTime, LocalDateTime과 변환 가능.
 
-# Collection - Collection 개념 & Map
-
-# Collection & Stack & ArrayDequeue
+# Collection
+- Collection 프레임워크 <br>
+  - 다수의 데이터를 다루기 위한 클래스의 집합.
+  - 데이터를 다루는데 필요한 기능을 제공하기 때문에 많이 유용.
+  - Collection 프레임워크의 모든 클래스는 Collection 인터페이스를 구현하는 클래스 또는 인터페이스
+- 대표 Collection 인터페이스, 자료구조 <br>
+  - List <br>
+    - 순서가 있는 데이터의 집합.
+    - 데이터 중복을 허용.
+    - ArrayList, LinkedList, Stack, ..
+  - Set <br>
+    - 순서를 유지하지 않음.
+    - 중복을 허용하지 않음.
+    - HashSet, TreeSet, ..
+  - Map <br>
+    - 키와 값의 쌍으로 이루어진 데이터 집합.
+    - 순서 유지되지 않음.
+    - key는 중복 X, value는 중복 O
+    - HashMap, TreeMap, ..
+  - Stack <br>
+    - 마지막에 넣은 데이터를 먼저 꺼내는 자료 구조, LIFO
+    - Stack, ArrayDequeu, ..
+  - Queue <br>
+    - FIFO
+  - Collection 인터페이스 <br>
+    - 자료 형에 대해서 공통으로 사용할 수 있는 기능을 제공.
 
 # 제네릭스
-
+- Generics란 <br>
+  - 클래스나 메소드 레벨에서 동작은 같지만 사용되는 타입만 다른 경우.
+  - 객체는 런타임에 생성되지만 객체가 사용하는 타입은 선언적으로 정의함으로써 컴파일 타임의 타입 체크를해서 더 안전하고 유연한 코드를 작성할 수 있음.
+  - 객체를 생성할 때 타입을 지정.
+  - ex) Set<Integer>, Set<String> 이런식으로 타입을 다르게..
+  
 # 람다
 
 # 스트림
